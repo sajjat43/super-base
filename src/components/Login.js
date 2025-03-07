@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import { 
   Container, 
@@ -13,31 +14,35 @@ import {
 import { authService } from '../services/authService';
 
 function Login({ onSwitchToRegister }) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [resetSent, setResetSent] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
 
-    const { data, error } = await authService.login(
-      formData.email,
-      formData.password
-    );
+    try {
+      const { data, error } = await authService.login(
+        formData.email,
+        formData.password
+      );
 
-    if (error) {
-      setError(error);
-    } else {
-      console.log('Login successful:', data);
+      if (error) {
+        setError(error);
+      } else if (data) {
+        navigate('/');
+      }
+    } catch (err) {
+      setError('An unexpected error occurred');
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   const handleForgotPassword = async () => {
@@ -52,7 +57,8 @@ function Login({ onSwitchToRegister }) {
     if (error) {
       setError(error);
     } else {
-      setResetSent(true);
+      setError(null);
+      alert('Password reset instructions have been sent to your email.');
     }
     setLoading(false);
   };
@@ -73,11 +79,6 @@ function Login({ onSwitchToRegister }) {
         {error && (
           <Alert severity="error" sx={{ mb: 2 }}>
             {error}
-          </Alert>
-        )}
-        {resetSent && (
-          <Alert severity="success" sx={{ mb: 2 }}>
-            Password reset instructions have been sent to your email.
           </Alert>
         )}
         <form onSubmit={handleSubmit}>

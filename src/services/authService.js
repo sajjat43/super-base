@@ -10,10 +10,8 @@ export const authService = {
       });
       
       if (error) throw error;
-      
       return { data, error: null };
     } catch (error) {
-      console.error('Login error:', error.message);
       return { data: null, error: error.message };
     }
   },
@@ -32,10 +30,8 @@ export const authService = {
       });
 
       if (error) throw error;
-
       return { data, error: null };
     } catch (error) {
-      console.error('Registration error:', error.message);
       return { data: null, error: error.message };
     }
   },
@@ -47,20 +43,7 @@ export const authService = {
       if (error) throw error;
       return { error: null };
     } catch (error) {
-      console.error('Logout error:', error.message);
       return { error: error.message };
-    }
-  },
-
-  // Get current session
-  async getCurrentSession() {
-    try {
-      const { data, error } = await supabase.auth.getSession();
-      if (error) throw error;
-      return { data, error: null };
-    } catch (error) {
-      console.error('Get session error:', error.message);
-      return { data: null, error: error.message };
     }
   },
 
@@ -71,7 +54,20 @@ export const authService = {
       if (error) throw error;
       return { error: null };
     } catch (error) {
-      console.error('Password reset error:', error.message);
+      return { error: error.message };
+    }
+  },
+
+  // Update password
+  async updatePassword(newPassword) {
+    try {
+      const { error } = await supabase.auth.updateUser({
+        password: newPassword
+      });
+
+      if (error) throw error;
+      return { error: null };
+    } catch (error) {
       return { error: error.message };
     }
   }
