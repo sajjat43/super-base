@@ -1,5 +1,15 @@
 import { supabase } from '../supabaseClient';
 
+// Add helper functions for cookie management
+const setCookie = (name, value, days = 7) => {
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
+};
+
+const deleteCookie = (name) => {
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+};
+
 export const authService = {
   // Login with email and password
   async login(email, password) {
@@ -10,6 +20,10 @@ export const authService = {
       });
       
       if (error) throw error;
+      
+      // Set custom cookie after successful login
+      setCookie('custom_cookies', 'random_text_' + Math.random().toString(36).substring(7));
+      
       return { data, error: null };
     } catch (error) {
       return { data: null, error: error.message };
@@ -41,6 +55,10 @@ export const authService = {
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
+      
+      // Remove custom cookie on logout
+      deleteCookie('custom_cookies');
+      
       return { error: null };
     } catch (error) {
       return { error: error.message };
