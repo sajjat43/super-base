@@ -3,51 +3,170 @@
 <head>
   <title>User Info & Cookies</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
     body {
-      width: 300px;
-      padding: 10px;
+      width: 380px;
+      padding: 16px;
+      background: #f8f9fa;
+      color: #212529;
     }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #1a73e8;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e9ecef;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      color: #495057;
+      margin: 16px 0 12px 0;
+    }
+
     .info-container {
-      margin: 10px 0;
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
+
     .cookie-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 5px 0;
-      padding: 5px;
-      border-bottom: 1px solid #eee;
+      padding: 8px;
+      margin: 8px 0;
+      background: #f8f9fa;
+      border-radius: 8px;
+      transition: all 0.2s ease;
     }
+
+    .cookie-item:hover {
+      background: #e9ecef;
+    }
+
+    .cookie-content {
+      flex: 1;
+      margin-right: 12px;
+    }
+
+    .cookie-name {
+      font-weight: 600;
+      color: #495057;
+      margin-bottom: 4px;
+    }
+
+    .cookie-value {
+      color: #6c757d;
+      font-size: 0.9rem;
+      word-break: break-all;
+    }
+
     .delete-btn {
-      background: #ff4444;
-      color: white;
-      border: none;
-      padding: 3px 8px;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-    .delete-all-btn {
       background: #dc3545;
       color: white;
       border: none;
-      padding: 8px 16px;
-      border-radius: 4px;
+      padding: 6px 12px;
+      border-radius: 6px;
       cursor: pointer;
-      margin-bottom: 10px;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .delete-btn:hover {
+      background: #c82333;
+      transform: translateY(-1px);
+    }
+
+    .delete-all-btn {
+      width: 100%;
+      background: #1a73e8;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      transition: all 0.2s ease;
+    }
+
+    .delete-all-btn:hover {
+      background: #1557b0;
+      transform: translateY(-1px);
+    }
+
+    .auth-info {
+      background: #f8f9fa;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+
+    .auth-info p {
+      margin: 8px 0;
+      color: #495057;
+    }
+
+    .auth-info strong {
+      color: #1a73e8;
+    }
+
+    .session-value {
+      font-family: monospace;
+      background: #e9ecef;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: #495057;
+    }
+
+    /* Loading animation */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 3px solid #1a73e8;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
-  <h2>User Information & Cookies</h2>
+  <h2>Cookie Manager</h2>
+  
   <div class="info-container">
-    <h3>User Info:</h3>
-    <div id="userInfo"></div>
+    <h3>User Information</h3>
+    <div id="userInfo">
+      <div class="loading"></div>
+    </div>
   </div>
+
   <div class="info-container">
-    <h3>Cookies:</h3>
-    <button id="deleteAllCookies" class="delete-all-btn">Delete All Cookies</button>
-    <div id="cookieInfo"></div>
+    <h3>Cookies</h3>
+    <button id="deleteAllCookies" class="delete-all-btn">
+      Delete All Cookies
+    </button>
+    <div id="cookieInfo">
+      <div class="loading"></div>
+    </div>
   </div>
-  <script src="popup.js"></script>
+
+  <script type="module" src="popup.js"></script>
 </body>
 </html> 

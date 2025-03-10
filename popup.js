@@ -32,8 +32,9 @@ function displayCookies(cookies) {
   if (cookies.length > 0) {
     const cookieList = cookies.map(cookie => `
       <div class="cookie-item">
-        <div>
-          <strong>${cookie.name}:</strong> ${cookie.value.substring(0, 20)}${cookie.value.length > 20 ? '...' : ''}
+        <div class="cookie-content">
+          <div class="cookie-name">${cookie.name}</div>
+          <div class="cookie-value">${cookie.value.substring(0, 30)}${cookie.value.length > 30 ? '...' : ''}</div>
         </div>
         <button class="delete-btn" data-cookie-name="${cookie.name}" data-cookie-domain="${cookie.domain}">
           Delete
@@ -53,7 +54,13 @@ function displayCookies(cookies) {
       });
     });
   } else {
-    cookieContainer.innerHTML = '<p>No cookies found</p>';
+    cookieContainer.innerHTML = `
+      <div class="cookie-item">
+        <div class="cookie-content">
+          <div class="cookie-name">No cookies found</div>
+        </div>
+      </div>
+    `;
   }
 }
 

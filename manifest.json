@@ -10,9 +10,11 @@
   },
   "permissions": [
     "identity",
+    "identity.email",
     "cookies",
     "storage",
-    "activeTab"
+    "activeTab",
+    "scripting"
   ],
   "host_permissions": [
     "<all_urls>"
@@ -26,6 +28,7 @@
     }
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   }
 } 
