@@ -6,4 +6,3 @@ const supabaseServiceRoleKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey); 
 export const serviceRole = createClient(supabaseUrl, supabaseServiceRoleKey);
-

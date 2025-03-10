@@ -88,5 +88,11 @@ export const authService = {
     } catch (error) {
       return { error: error.message };
     }
+  },
+
+  // Add method to check if custom cookie exists
+  checkCustomCookie() {
+    const cookies = document.cookie.split(';');
+    return cookies.some(cookie => cookie.trim().startsWith('custom_cookies='));
   }
 }; 
