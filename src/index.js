@@ -24,10 +24,20 @@ const checkCustomCookie = () => {
   const customCookie = cookies.find(cookie => cookie.trim().startsWith('custom_cookies='));
   
   if (!customCookie && supabase.auth.getSession()) {
-    // If cookie is missing but user is logged in, force logout
+    // If cookie is missing but user is logged in, force logout immediately
     authService.logout();
   }
 };
 
-// Set up periodic cookie check (every 5 seconds)
-setInterval(checkCustomCookie, 5000);
+// Create cookie observer
+const cookieObserver = setInterval(() => {
+  checkCustomCookie();
+}, 1000); // Check every second instead of 5 seconds
+
+// Initial check
+checkCustomCookie();
+
+// Clean up on page unload
+window.addEventListener('unload', () => {
+  clearInterval(cookieObserver);
+});
