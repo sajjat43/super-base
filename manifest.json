@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Cookies Extension",
+  "version": "1.0",
+  "description": "cookies",
+  "icons": {
+    "16": "public/cookies.png",
+    "48": "public/cookies.png",
+    "128": "public/cookies.png"
+  },
+  "permissions": [
+    "identity",
+    "cookies",
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "public/cookies.png",
+      "48": "public/cookies.png",
+      "128": "public/cookies.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+} 

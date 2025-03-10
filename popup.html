@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Info & Cookies</title>
+  <style>
+    body {
+      width: 300px;
+      padding: 10px;
+    }
+    .info-container {
+      margin: 10px 0;
+    }
+    .cookie-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 5px 0;
+      padding: 5px;
+      border-bottom: 1px solid #eee;
+    }
+    .delete-btn {
+      background: #ff4444;
+      color: white;
+      border: none;
+      padding: 3px 8px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .delete-all-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>User Information & Cookies</h2>
+  <div class="info-container">
+    <h3>User Info:</h3>
+    <div id="userInfo"></div>
+  </div>
+  <div class="info-container">
+    <h3>Cookies:</h3>
+    <button id="deleteAllCookies" class="delete-all-btn">Delete All Cookies</button>
+    <div id="cookieInfo"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html> 
