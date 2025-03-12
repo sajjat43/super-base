@@ -74,7 +74,6 @@ function deleteCookie(name, domain) {
     if (chrome.runtime.lastError) {
       console.error(chrome.runtime.lastError);
     } else {
-      // Reload cookies after deletion
       loadCookies();
     }
   });
